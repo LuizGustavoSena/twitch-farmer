@@ -32,3 +32,16 @@ client.on('disconnected', (reason) => {
 });
 
 client.connect();
+
+// Workaround for render.com
+const express = require("express");
+const app = express();
+const port = 3000;
+
+app.get("/", function (req, res) {
+    res.send("Ok!");
+});
+
+app.listen(port, function () {
+    console.log(`Twitch Farmer is listening on port ${port}!`);
+});
