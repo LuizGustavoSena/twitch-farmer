@@ -21,10 +21,10 @@ app.listen(port, function () {
     console.log(`Twitch Farmer is listening on port ${port}!`);
 });
 
-const http = require("http");
+const https = require("https");
 
 setInterval(() => {
-    http.get(`https://twitch-farmer.onrender.com/`);
+    https.get(`https://twitch-farmer.onrender.com/`);
 }, 10 * 60 * 1000);
 
 // Bot
