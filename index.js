@@ -7,6 +7,27 @@ require('log-timestamp')(
     }
 )
 
+// Workaround for render.com
+const express = require("express");
+const app = express();
+const port = 3000;
+
+app.get("/", function (req, res) {
+    console.log("Ping received!");
+    res.send("Ok!");
+});
+
+app.listen(port, function () {
+    console.log(`Twitch Farmer is listening on port ${port}!`);
+});
+
+const http = require("http");
+
+setInterval(() => {
+    http.get(`https://twitch-farmer.onrender.com/`);
+}, 10 * 60 * 1000);
+
+// Bot
 channelsList = (process.env.CHANNELS).split(',');
 
 console.debug('Starting farmer for channels: ' + channelsList);
@@ -32,16 +53,3 @@ client.on('disconnected', (reason) => {
 });
 
 client.connect();
-
-// Workaround for render.com
-const express = require("express");
-const app = express();
-const port = 3000;
-
-app.get("/", function (req, res) {
-    res.send("Ok!");
-});
-
-app.listen(port, function () {
-    console.log(`Twitch Farmer is listening on port ${port}!`);
-});
